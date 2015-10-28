@@ -24,27 +24,24 @@
  *  '  '
  */
 var cssquery = window.cssquery = function(string) {
-  // split string + create array;
+  // split selectors;
   var selectors = string.split(" ");
   var querySelectorAll = [];
-  // loop through param; 
-  [].forEach.call(selectors, function(selector) {
-    var byTagName = document.getElementsByTagName(selector);
-    var byClassName = document.getElementByClassName(selector);
-    var byId = document.getElementById(selector)
+  // loop through array;  
+  // if array has one element -- search for element
+  // if array has more then one, loop
+  selectors.reduce(function(previousValue, currentValue, index, array) {
+
+    console.log("previous value", previousValue);
+    console.log("current value", currentValue);
+    var byTagName = document.getElementsByTagName(previousValue);
 
     // check if such a selector exists, push to given array;
     if (byTagName) {
       querySelectorAll.push(byTagName);
     }
-    if (byClassName) {
-      querySelectorAll.push(byClassName);
-    }
-    if (byId) {
-      querySelectorAll.push(byId)
-    }
-  });
+  })
+
   return querySelectorAll;
 };
-
 
